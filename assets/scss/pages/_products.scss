@@ -75,6 +75,14 @@
     object-fit: cover;
     aspect-ratio: 1;
   }
+  .img {
+    height: auto;
+    width: auto;
+    background: $color-overlay;
+    overflow: hidden;
+    border-radius: rem(8px);
+    //border: 1px $color-border solid;
+  }
 
   div {
     display: flex;
@@ -83,6 +91,26 @@
     div {
       flex-direction: column;
       justify-content: flex-start;
+    }
+
+    .btn {
+      position: absolute;
+      z-index: 999;
+      margin: 0 auto;
+      left: rem(100px);
+      right: 0;
+      top: 37%;
+      background-color: $color-white;
+      border: none;
+      padding: rem(18px) rem(26px);
+      font-size: 20px;
+      font-weight: 800;
+      box-shadow: 0 10px 16px $color-border;
+      border-radius: 30px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     h3 {
