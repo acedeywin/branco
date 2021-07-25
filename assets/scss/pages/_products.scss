@@ -66,6 +66,10 @@
 .product {
   font-family: $font-family;
 
+  // &:hover {
+  //   cursor: pointer;
+  // }
+
   img {
     max-width: 100%;
     border: 1px $color-border solid;
@@ -81,6 +85,7 @@
     background: $color-overlay;
     overflow: hidden;
     border-radius: rem(8px);
+
     //border: 1px $color-border solid;
   }
 
@@ -93,7 +98,7 @@
       justify-content: flex-start;
     }
 
-    .btn {
+    .review-btn {
       position: absolute;
       z-index: 999;
       margin: 0 auto;
@@ -105,6 +110,45 @@
       padding: rem(18px) rem(26px);
       font-size: 20px;
       font-weight: 800;
+      box-shadow: 0 10px 16px $color-border;
+      border-radius: 30px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .fa-star {
+      color: $color-black;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .stars {
+      position: absolute;
+      margin: 0 auto;
+      left: rem(107px);
+      right: 0;
+      top: 40%;
+      border: none;
+      padding-left: rem(26px);
+      font-size: rem(25px);
+      font-weight: 800;
+    }
+
+    .cancel-btn {
+      position: absolute;
+      z-index: 999;
+      margin: 0 auto;
+      left: rem(155px);
+      right: 0;
+      top: 60%;
+      background-color: $color-white;
+      border: none;
+      padding: rem(10px) rem(20px);
+      font-size: 16px;
+      font-weight: $font-weight-bold;
       box-shadow: 0 10px 16px $color-border;
       border-radius: 30px;
 
@@ -141,4 +185,12 @@
       margin-left: rem(16px);
     }
   }
+}
+
+.hide {
+  display: none;
+}
+
+.visible {
+  visibility: hidden;
 }
