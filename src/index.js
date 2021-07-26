@@ -61,6 +61,9 @@ const cancelReview = () => {
     //  const icons = d.querySelector(".stars")
     //  icons.inse
 
+    //We wouldn't wanr them to tell us all their life story in a review.
+    //we would want their review to specify and straight to the point.
+
     starsDiv.removeChild(starsSpan)
     product.removeChild(starsDiv)
     product.addEventListener("click", clickReviewButton)
@@ -71,3 +74,17 @@ const cancelReview = () => {
 
 product.addEventListener("click", cancelReview)
 product.addEventListener("click", clickReviewButton)
+
+// {
+//   <div>
+//             <p class="question">What's wrong with it?</p>
+//           </div>
+
+//           <div>
+//             <textarea
+//               class="review"
+//               type="text"
+//               placeholder="Let us know your thought"
+//             ></textarea>
+//           </div>
+// }

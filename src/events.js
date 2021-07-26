@@ -1,138 +1,192 @@
 const d = document
 const products = d.querySelectorAll(".product")
 
-const writeReviewOverlay = async () => {
-  const images = d.querySelectorAll(".image")
-  const imgs = d.querySelectorAll("img")
-  const buttonDiv = d.createElement("div")
-  const button = d.createElement("button")
-  const starsDiv = d.createElement("div")
-  const starsSpan = d.createElement("span")
-  let btn
+const images = d.querySelectorAll(".image")
+const imgs = d.querySelectorAll("img")
+const buttonDiv = d.createElement("div")
+const button = d.createElement("button")
+const starsDiv = d.createElement("div")
+const starsSpan = d.createElement("span")
+const questionDiv = d.createElement("div")
+const questionTag = d.createElement("p")
+const reviewDiv = d.createElement("div")
+const textArea = d.createElement("textarea")
 
-  products.forEach(product => {
-    // add style and display button on hover
+let btn
+let clicked = []
 
-    const addReviewButton = () => {
+products.forEach(product => {
+  // add style and display button on hover
+
+  const addReviewButton = () => {
+    button.setAttribute("class", "review-btn")
+    buttonDiv.appendChild(button)
+    product.appendChild(buttonDiv)
+
+    btn = d.querySelector(".review-btn")
+    btn.innerHTML = "Write a review"
+    product.style.position = "relative"
+
+    // add opacity for all image on hover
+    imgs.forEach(img => {
+      img.addEventListener("mouseenter", event => {
+        event.target.style.opacity = "0.4"
+      })
+    })
+
+    //add img class for overlay styling ml
+    images.forEach(image => {
+      image.addEventListener("mouseenter", event => {
+        event.target.classList.add("img")
+      })
+    })
+  }
+
+  //remove style and hide button on mouseleave
+  const removeReviwButton = () => {
+    product.removeChild(buttonDiv)
+
+    images.forEach(image => {
+      image.classList.remove("img")
+    })
+
+    imgs.forEach(img => {
+      img.style.removeProperty("opacity")
+    })
+    product.style.removeProperty("relative")
+  }
+
+  const clickReviewButton = () => {
+    const iconClass = [
+      `<i class="fas fa-star"></i>`,
+      `<i class="fas fa-star"></i>`,
+      `<i class="fas fa-star"></i>`,
+      `<i class="fas fa-star"></i>`,
+      `<i class="fas fa-star"></i>`,
+    ]
+    let singleButton = d.querySelector(".review-btn")
+    const allButtons = d.querySelectorAll(".review-btn")
+    for (let prod of products) {
+      if (prod !== product) {
+        prod.classList.add("disabled")
+      }
+    }
+
+    for (let btn of allButtons) {
+      if (btn !== singleButton) {
+        btn.disabled = true
+      }
+    }
+
+    singleButton.classList.add("hide")
+    //singleButton.textContent = "Cancel"
+
+    starsSpan.setAttribute("class", "stars")
+    starsDiv.appendChild(starsSpan)
+    product.appendChild(starsDiv)
+
+    // button.setAttribute("class", "cancel-btn")
+    // buttonDiv.appendChild(button)
+    // product.appendChild(buttonDiv)
+
+    // btn = d.querySelector(".cancel-btn")
+    // btn.textContent = "Cancel"
+
+    const icons = d.querySelector(".stars")
+    iconClass
+      .map(cls => {
+        icons.insertAdjacentHTML("afterbegin", cls)
+      })
+      .join("")
+
+    product.removeEventListener("mouseenter", addReviewButton)
+    product.removeEventListener("click", clickReviewButton)
+    product.removeEventListener("mouseleave", removeReviwButton)
+
+    // button.setAttribute("class", "cancel-btn")
+    // buttonDiv.appendChild(button)
+    // product.appendChild(buttonDiv)
+
+    // btn = d.querySelector(".cancel-btn")
+    // btn.innerHTML = "Cancel"
+    //product.style.position = "relative"
+  }
+
+  const cancelReview = () => {
+    if (btn.innerHTML === "Cancel") {
+      button.classList.remove("hide")
       button.setAttribute("class", "review-btn")
       buttonDiv.appendChild(button)
       product.appendChild(buttonDiv)
-
       btn = d.querySelector(".review-btn")
-      btn.innerHTML = "Write a review"
-      product.style.position = "relative"
+      btn.textContent = "Write a review"
 
-      // add opacity for all image on hover
-      imgs.forEach(img => {
-        img.addEventListener("mouseenter", event => {
-          event.target.style.opacity = "0.4"
-        })
-      })
-
-      //add img class for overlay styling ml
-      images.forEach(image => {
-        image.addEventListener("mouseenter", event => {
-          event.target.classList.add("img")
-        })
-      })
-    }
-
-    //remove style and hide button on mouseleave
-    const removeReviwButton = () => {
-      product.removeChild(buttonDiv)
-
-      images.forEach(image => {
-        image.classList.remove("img")
-      })
-
-      imgs.forEach(img => {
-        img.style.removeProperty("opacity")
-      })
-      product.style.removeProperty("relative")
-    }
-
-    const clickReviewButton = () => {
-      const iconClass = [
-        "fas fa-star",
-        "fas fa-star",
-        "fas fa-star",
-        "fas fa-star",
-        "fas fa-star",
-      ]
-      const singleBtn = d.querySelector(".review-btn")
-      const allBtns = d.querySelectorAll(".review-btn")
-      for (let pro of products) {
-        if (pro !== product) {
-          pro.style.pointerEvents = "none"
+      for (let prod of products) {
+        if (prod !== product) {
+          prod.classList.remove("disabled")
         }
       }
 
-      for (let btn of allBtns) {
-        if (btn !== singleBtn) {
-          btn.disabled = true
-        }
-      }
-
-      singleBtn.classList.add("hide")
-
-      starsSpan.setAttribute("class", "stars")
-      starsDiv.appendChild(starsSpan)
-      product.appendChild(starsDiv)
-
-      const starIcon = iconClass
-        .map(cls => {
-          return `<i class="${cls}"></i>`
-        })
-        .join("")
-
-      const icons = d.querySelector(".stars")
-      icons.insertAdjacentHTML("afterbegin", starIcon)
-      product.removeEventListener("mouseenter", addReviewButton)
-      product.removeEventListener("click", clickReviewButton)
-      product.removeEventListener("mouseleave", removeReviwButton)
-
-      // button.setAttribute("class", "cancel-btn")
-      // buttonDiv.appendChild(button)
-      // product.appendChild(buttonDiv)
-
-      // btn = d.querySelector(".cancel-btn")
-      // btn.innerHTML = "Cancel"
-      //product.style.position = "relative"
+      starsDiv.removeChild(starsSpan)
+      product.removeChild(starsDiv)
+      product.addEventListener("click", clickReviewButton)
+      product.addEventListener("mouseenter", addReviewButton)
+      product.addEventListener("mouseleave", removeReviwButton)
     }
+  }
 
-    const cancelReview = () => {
-      if (btn.innerHTML === "Cancel") {
-        button.classList.remove("hide")
-        button.setAttribute("class", "review-btn")
+  const setRating = () => {
+    const stars = d.querySelectorAll(".stars .fa-star")
+    const starsSpan = d.querySelector(".stars")
+    console.log(stars)
+
+    stars.forEach((star, index) => {
+      const starClicked = () => {
+        stars.forEach((clicked, clickedIndex) => {
+          if (clickedIndex <= index) {
+            clicked.classList.add("clicked")
+          }
+        })
+
+        starsSpan.classList.remove("stars")
+        starsSpan.classList.add("disabled")
+        starsSpan.classList.add("move-stars")
+        questionTag.setAttribute("class", "question")
+        textArea.setAttribute("class", "review")
+        textArea.setAttribute("type", "text")
+        textArea.setAttribute("id", "review")
+        textArea.setAttribute("placeholder", "Let us know your thought")
+        questionDiv.appendChild(questionTag)
+        reviewDiv.appendChild(textArea)
+        product.appendChild(questionDiv)
+        product.appendChild(reviewDiv)
+
+        button.setAttribute("class", "submit-btn")
         buttonDiv.appendChild(button)
         product.appendChild(buttonDiv)
-        btn = d.querySelector(".review-btn")
-        btn.innerHTML = "Write a review"
+        btn = d.querySelector(".submit-btn")
+        btn.textContent = "Submit"
 
-        for (let pro of products) {
-          if (pro !== product) {
-            pro.classList.remove("visible")
-          }
-        }
+        const label = d.querySelector(".question")
 
-        // const icons = d.querySelector(".stars")
-        //  icons.inse
+        clicked.push(index + 1)
 
-        starsDiv.removeChild(starsSpan)
-        product.removeChild(starsDiv)
-        product.addEventListener("click", clickReviewButton)
-        product.addEventListener("mouseenter", addReviewButton)
-        product.addEventListener("mouseleave", removeReviwButton)
+        parseInt(clicked[0]) <= 2
+          ? (label.textContent = "What's wrong with it?")
+          : (label.textContent = "Any highlight you would like to share?")
+
+        const reviewText = d.getElementsByClassName("review")
+
+        console.log(reviewText.value)
       }
-    }
+      star.addEventListener("click", starClicked)
+    })
+    console.log(clicked)
+  }
 
-    // const icons = d.querySelectorAll(".fa-star")
-    // console.log(icons)
-
-    product.addEventListener("click", clickReviewButton)
-    product.addEventListener("click", cancelReview)
-    product.addEventListener("mouseenter", addReviewButton)
-    product.addEventListener("mouseleave", removeReviwButton)
-  })
-}
-writeReviewOverlay()
+  product.addEventListener("click", setRating)
+  product.addEventListener("click", clickReviewButton)
+  product.addEventListener("click", cancelReview)
+  product.addEventListener("mouseenter", addReviewButton)
+  product.addEventListener("mouseleave", removeReviwButton)
+})

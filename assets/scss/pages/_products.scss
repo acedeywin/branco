@@ -65,13 +65,14 @@
 
 .product {
   font-family: $font-family;
+  position: relative;
 
   // &:hover {
   //   cursor: pointer;
   // }
 
   img {
-    max-width: 100%;
+    max-width: $full-opacity;
     border: 1px $color-border solid;
     border-radius: rem(8px);
     box-shadow: 0 2px 16px $color-border;
@@ -109,7 +110,7 @@
       border: none;
       padding: rem(18px) rem(26px);
       font-size: 20px;
-      font-weight: 800;
+      font-weight: $font-weight-bolder;
       box-shadow: 0 10px 16px $color-border;
       border-radius: 30px;
 
@@ -120,6 +121,7 @@
 
     .fa-star {
       color: $color-black;
+      padding: 5px;
 
       &:hover {
         cursor: pointer;
@@ -128,13 +130,43 @@
     .stars {
       position: absolute;
       margin: 0 auto;
-      left: rem(107px);
+      left: rem(78px);
       right: 0;
-      top: 40%;
+      top: 39%;
       border: none;
       padding-left: rem(26px);
       font-size: rem(25px);
-      font-weight: 800;
+      font-weight: $font-weight-bolder;
+    }
+
+    .move-stars {
+      position: absolute;
+      margin: 0 auto;
+      left: rem(78px);
+      right: 0;
+      top: 10%;
+      border: none;
+      padding-left: rem(26px);
+      font-size: rem(25px);
+      font-weight: $font-weight-bolder;
+    }
+
+    .stars .fa-star {
+      opacity: 90%;
+    }
+    .stars:hover .fa-star {
+      opacity: $full-opacity;
+    }
+    .stars .fa-star:hover {
+      opacity: $full-opacity;
+    }
+    .stars .fa-star:hover ~ .fa-star {
+      opacity: $half-opacity;
+    }
+
+    .clicked {
+      color: $color-white;
+      opacity: $full-opacity;
     }
 
     .cancel-btn {
@@ -151,10 +183,67 @@
       font-weight: $font-weight-bold;
       box-shadow: 0 10px 16px $color-border;
       border-radius: 30px;
+      content: "Cancel";
+      // pointer-events: visible;
 
       &:hover {
         cursor: pointer;
       }
+    }
+
+    .submit-btn {
+      position: absolute;
+      z-index: 999;
+      margin: 0 auto;
+      left: rem(130px);
+      right: 0;
+      top: 70%;
+      background-color: $color-white;
+      border: none;
+      padding: rem(12px) rem(40px);
+      font-size: 18px;
+      font-weight: $font-weight-bold;
+      box-shadow: 0 10px 16px $color-border;
+      border-radius: 30px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .float-container {
+      border: solid 1px #ccc;
+      padding: 0 8px;
+    }
+    .review {
+      font-size: 16px;
+      padding: 38px 0 80px 17px;
+      width: 90%;
+      box-shadow: 0 10px 16px $color-border;
+      resize: none;
+      margin-left: 11px;
+      position: absolute;
+      z-index: 99;
+      top: 21%;
+      overflow: hidden;
+      border-radius: 10px;
+      border: none;
+    }
+
+    ::placeholder {
+      // padding-top: 5px;
+      font-weight: 500;
+      color: $color-black;
+    }
+
+    .question {
+      font-size: 16px;
+      position: absolute;
+      top: 23%;
+      left: 10px;
+      z-index: 999;
+      padding: 5px 20px;
+      font-weight: $font-weight-bold;
     }
 
     h3 {
@@ -193,4 +282,7 @@
 
 .visible {
   visibility: hidden;
+}
+.disabled {
+  pointer-events: none;
 }
