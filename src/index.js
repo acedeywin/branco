@@ -75,16 +75,6 @@ const cancelReview = () => {
 product.addEventListener("click", cancelReview)
 product.addEventListener("click", clickReviewButton)
 
-// {
-//   <div>
-//             <p class="question">What's wrong with it?</p>
-//           </div>
-
-//           <div>
-//             <textarea
-//               class="review"
-//               type="text"
-//               placeholder="Let us know your thought"
-//             ></textarea>
-//           </div>
-// }
+submitButton.innerHTML = `<a><i class="fas fa-times fa-2x"></i></a>`
+submitButton.style.padding = "9px 65px"
+submitButton.style.left = "110px"

@@ -67,10 +67,6 @@
   font-family: $font-family;
   position: relative;
 
-  // &:hover {
-  //   cursor: pointer;
-  // }
-
   img {
     max-width: $full-opacity;
     border: 1px $color-border solid;
@@ -86,8 +82,6 @@
     background: $color-overlay;
     overflow: hidden;
     border-radius: rem(8px);
-
-    //border: 1px $color-border solid;
   }
 
   div {
@@ -130,7 +124,7 @@
     .stars {
       position: absolute;
       margin: 0 auto;
-      left: rem(78px);
+      left: rem(60px);
       right: 0;
       top: 39%;
       border: none;
@@ -142,7 +136,7 @@
     .move-stars {
       position: absolute;
       margin: 0 auto;
-      left: rem(78px);
+      left: rem(60px);
       right: 0;
       top: 10%;
       border: none;
@@ -205,10 +199,6 @@
       font-weight: $font-weight-bold;
       box-shadow: 0 10px 16px $color-border;
       border-radius: 30px;
-
-      &:hover {
-        cursor: pointer;
-      }
     }
 
     .float-container {
@@ -243,6 +233,21 @@
       left: 10px;
       z-index: 999;
       padding: 5px 20px;
+      font-weight: $font-weight-bold;
+    }
+    .count {
+      position: absolute;
+      top: 55%;
+      left: 12px;
+      font-size: 13px;
+      font-weight: $font-weight-bold;
+      border: none;
+      background: transparent;
+    }
+    .count-text {
+      position: absolute;
+      top: 55.1%;
+      left: 41px;
       font-weight: $font-weight-bold;
     }
 
@@ -285,4 +290,10 @@
 }
 .disabled {
   pointer-events: none;
+}
+.disabled-btn:hover {
+  cursor: not-allowed;
+}
+.enabled-btn:hover {
+  cursor: pointer;
 }
