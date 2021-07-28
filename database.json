@@ -23,18 +23,6 @@
       "rating": 3,
       "comment": "You have been assigned a ticket to implement some changes to an existing page on our website. For the sake of this task, it's important to know that the navigation and footer are part of this page, instead of g",
       "id": 4
-    },
-    {
-<<<<<<< HEAD
-      "productId": 1,
-      "rating": 4,
-      "comment": "Hello, I liked what I saw. Thank you.",
-=======
-      "productId": 2,
-      "rating": 2,
-      "comment": "Creating a pull request",
->>>>>>> dev
-      "id": 5
     }
   ]
 }
