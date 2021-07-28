@@ -158,7 +158,7 @@ products.forEach(product => {
         product.appendChild(form)
 
         const submitButton = d.querySelector(".submit-btn")
-        submitButton.innerHTML = "Submit"
+        submitButton.textContent = "Submit"
         submitButton.disabled = true
         submitButton.classList.add("disabled-btn")
 
@@ -197,7 +197,7 @@ products.forEach(product => {
         product.appendChild(countTextDiv)
 
         const submitButton = d.querySelector(".submit-btn")
-        submitButton.innerHTML = "Submit"
+        submitButton.textContent = "Submit"
 
         //check if user input is valid
         const validText = review.value.trim()
