@@ -1,21 +1,26 @@
-const d = document
-const products = d.querySelectorAll(".product")
-const images = d.querySelectorAll(".image")
-const imgs = d.querySelectorAll("img")
-//create elements
-const buttonDiv = d.createElement("div")
-const button = d.createElement("button")
-const starsDiv = d.createElement("div")
-const starsSpan = d.createElement("span")
-const questionDiv = d.createElement("div")
-const questionTag = d.createElement("p")
-const reviewDiv = d.createElement("div")
-const textArea = d.createElement("textarea")
-const countDiv = d.createElement("div")
-const countBox = d.createElement("input")
-const countTextDiv = d.createElement("div")
-const countText = d.createElement("p")
-const form = d.createElement("form")
+import {
+  d,
+  products,
+  images,
+  imgs,
+  buttonDiv,
+  starsDiv,
+  starsSpan,
+  questionDiv,
+  questionTag,
+  reviewDiv,
+  textArea,
+  countDiv,
+  countBox,
+  countTextDiv,
+  countText,
+  form,
+  cancelDiv,
+  cancelButton,
+  button,
+  url,
+  iconTags,
+} from "./utils.js"
 
 const clicked = []
 
@@ -60,23 +65,16 @@ products.forEach(product => {
 
   //when user click on the review button
   const clickReviewButton = () => {
-    const iconTags = `
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      `
-    const allButtons = d.querySelectorAll(".review-btn")
+    const reviewButtons = d.querySelectorAll(".review-btn")
+
+    for (let prod of products) {
+      if (prod !== product) {
+        prod.classList.add("disabled")
+      }
+    }
 
     //disabled other products
-    allButtons.forEach(singleButton => {
-      for (let prod of products) {
-        if (prod !== product) {
-          prod.classList.add("disabled")
-        }
-      }
-
+    reviewButtons.forEach(singleButton => {
       const reviewButton = () => {
         singleButton.classList.add("hide")
 
@@ -88,6 +86,14 @@ products.forEach(product => {
         const icons = d.querySelector(".stars")
         icons.innerHTML = iconTags
 
+        //add a cancel button to cancel review
+        cancelButton.setAttribute("class", "cancel-btn")
+        cancelDiv.appendChild(cancelButton)
+        product.appendChild(cancelDiv)
+
+        const cancel = d.querySelector(".cancel-btn")
+        cancel.textContent = "Cancel"
+
         //remove any other product event listener
         product.removeEventListener("click", clickReviewButton)
         product.removeEventListener("mouseenter", addOverlayButton)
@@ -97,10 +103,24 @@ products.forEach(product => {
     })
   }
 
+  //cancel review before you even start
+  const cancelReview = () => {
+    const cancelButton = d.querySelectorAll(".cancel-btn")
+
+    cancelButton.forEach(button => {
+      const cancel = () => {
+        window.location.reload()
+      }
+
+      button.addEventListener("click", cancel)
+    })
+  }
+
   //setting ratings when clicked
   const setRating = () => {
     const stars = d.querySelectorAll(".stars .fa-star")
     const starsSpan = d.querySelector(".stars")
+    const cancel = d.querySelectorAll(".cancel-btn")
 
     stars.forEach((star, index) => {
       const starClicked = () => {
@@ -109,6 +129,11 @@ products.forEach(product => {
           if (clickedIndex <= index) {
             clicked.classList.add("clicked")
           }
+        })
+
+        //hide cancel button
+        cancel.forEach(hideCancel => {
+          hideCancel.classList.add("hide")
         })
 
         //add textarea
@@ -128,7 +153,6 @@ products.forEach(product => {
 
         //add submit button
         button.setAttribute("class", "submit-btn")
-        button.setAttribute("type", "reset")
         buttonDiv.appendChild(button)
         form.appendChild(buttonDiv)
         product.appendChild(form)
@@ -222,12 +246,22 @@ products.forEach(product => {
 
           //adjust the count supporting text as count changes accordingly
           counterText.forEach(text => {
-            if (count.value <= 9) {
-              text.style.left = "25px"
-            } else if (count.value <= 99) {
-              text.style.left = "32px"
+            if (window.screen.width > 1024) {
+              if (count.value <= 9) {
+                text.style.width = "89%"
+              } else if (count.value <= 99) {
+                text.style.width = "86%"
+              } else {
+                text.style.width = "81%"
+              }
             } else {
-              text.style.left = "41px"
+              if (count.value <= 9) {
+                text.style.width = "85%"
+              } else if (count.value <= 99) {
+                text.style.width = "80%"
+              } else {
+                text.style.width = "75%"
+              }
             }
           })
         })
@@ -253,14 +287,15 @@ products.forEach(product => {
 
   //post review to fake API
   const postReview = () => {
+    const cancel = d.querySelectorAll(".cancel-btn")
     const reviewText = d.querySelectorAll(".review")
-    const submitButons = d.querySelectorAll(".submit-btn")
+    const submitButtons = d.querySelectorAll(".submit-btn")
     const spans = d.querySelectorAll("span")
-    const url = `http://localhost:3000/reviews`
+    const rating = clicked[0]
     let loading = false
     let productId
     let comment
-    const rating = clicked[0]
+    let status
 
     products.forEach((prod, index) => {
       if (prod == product) {
@@ -268,11 +303,19 @@ products.forEach(product => {
       }
     })
 
-    submitButons.forEach(submit => {
-      const review = async () => {
+    submitButtons.forEach(submit => {
+      const review = async e => {
         reviewText.forEach(review => {
           //get only valid input as comment
           comment = review.value.replace(/\s+/g, " ")
+        })
+        //hide cancel button
+        cancel.forEach(hideCancel => {
+          hideCancel.classList.add("hide")
+        })
+
+        spans.forEach(span => {
+          span.classList.add("hide")
         })
 
         submit.classList.remove("hide")
@@ -285,13 +328,11 @@ products.forEach(product => {
         //set loading icon if loading is true
         if (loading === true) {
           submit.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i>`
-          submit.style.padding = "9px 65px"
-          submit.style.left = "125px"
-          submit.disabled = true
           submit.disabled = true
         }
 
         //make a post request to fake API
+        e.preventDefault()
         await fetch(url, {
           method: "POST",
           headers,
@@ -301,10 +342,9 @@ products.forEach(product => {
             //error handling
             if (!response.ok) {
               submit.innerHTML = `<i class="fas fa-times"></i>`
-              submit.style.padding = "9px 65px"
-              submit.style.left = "125px"
               submit.disabled = false
-
+              status = d.querySelector(".fa-times")
+              status.style.color = "red"
               loading = false
             }
             loading = true
@@ -313,16 +353,11 @@ products.forEach(product => {
           .then(response => {
             //handle success
             submit.innerHTML = `<i class="fas fa-check"></i>`
-            submit.style.padding = "9px 65px"
-            submit.style.left = "125px"
             submit.disabled = true
-
+            status = d.querySelector(".fa-check")
+            status.style.color = "green"
             textArea.classList.add("hide")
             questionTag.classList.add("hide")
-            spans.forEach(span => {
-              span.classList.add("hide")
-            })
-
             loading = false
 
             //refresh page if post is successful
@@ -333,13 +368,16 @@ products.forEach(product => {
           .catch(error => {
             //error handling
             submit.innerHTML = `<i class="fas fa-times"></i>`
-            submit.style.padding = "9px 65px"
-            submit.style.left = "125px"
             submit.disabled = false
+            status = d.querySelector(".fa-times")
+            status.style.color = "red"
             loading = false
           })
       }
-      submit.addEventListener("click", review)
+
+      submit.addEventListener("click", e => {
+        review(e)
+      })
     })
   }
 
@@ -347,6 +385,7 @@ products.forEach(product => {
   product.addEventListener("mouseenter", addOverlayButton)
   product.addEventListener("mouseleave", removeOverlayButton)
   product.addEventListener("click", clickReviewButton)
+  product.addEventListener("click", cancelReview)
   product.addEventListener("click", setRating)
   product.addEventListener("click", setCount)
   product.addEventListener("click", setCharacterLimit)

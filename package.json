@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Sketch – Web Developer challenge for 2021 hiring",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "sass": "sass --style=compressed --color assets/scss/styles.scss static_assets/css/styles.css",
     "server": "serve ./",

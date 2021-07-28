@@ -1,6 +1,3 @@
-.page-products {
-}
-
 #header {
   padding-top: rem(100px);
   padding-bottom: rem(160px);
@@ -97,7 +94,8 @@
       position: absolute;
       z-index: 999;
       margin: 0 auto;
-      left: rem(100px);
+      width: 55%;
+      left: 0;
       right: 0;
       top: 37%;
       background-color: $color-white;
@@ -111,11 +109,17 @@
       &:hover {
         cursor: pointer;
       }
+
+      @include respond(tab-land) {
+        font-size: 14px;
+        width: 65%;
+        top: 33%;
+      }
     }
 
     .fa-star {
       color: $color-black;
-      padding: 5px;
+      padding: 2px;
 
       &:hover {
         cursor: pointer;
@@ -124,25 +128,47 @@
     .stars {
       position: absolute;
       margin: 0 auto;
-      left: rem(60px);
+      width: 56%;
+      left: 0;
       right: 0;
       top: 39%;
       border: none;
       padding-left: rem(26px);
       font-size: rem(25px);
       font-weight: $font-weight-bolder;
+
+      @include respond(tab-land) {
+        font-size: 20px;
+        top: 34%;
+        width: 69%;
+      }
+
+      @include respond(tab-port) {
+        width: 57%;
+        top: 38%;
+      }
     }
 
     .move-stars {
       position: absolute;
       margin: 0 auto;
-      left: rem(60px);
+      width: 56%;
+      left: 0;
       right: 0;
       top: 10%;
       border: none;
       padding-left: rem(26px);
       font-size: rem(25px);
       font-weight: $font-weight-bolder;
+
+      @include respond(tab-land) {
+        font-size: 20px;
+        width: 69%;
+      }
+
+      @include respond(tab-port) {
+        width: 57%;
+      }
     }
 
     .stars .fa-star {
@@ -161,27 +187,30 @@
     .clicked {
       color: $color-white;
       opacity: $full-opacity;
+      outline: none;
     }
 
     .cancel-btn {
       position: absolute;
       z-index: 999;
       margin: 0 auto;
-      left: rem(155px);
+      width: 30%;
+      left: 0;
       right: 0;
       top: 60%;
       background-color: $color-white;
       border: none;
-      padding: rem(10px) rem(20px);
+      padding: rem(13px) rem(20px);
       font-size: 16px;
       font-weight: $font-weight-bold;
       box-shadow: 0 10px 16px $color-border;
       border-radius: 30px;
-      content: "Cancel";
-      // pointer-events: visible;
 
       &:hover {
         cursor: pointer;
+      }
+      @include respond(tab-land) {
+        width: 40%;
       }
     }
 
@@ -189,16 +218,22 @@
       position: absolute;
       z-index: 999;
       margin: 0 auto;
-      left: rem(130px);
+      width: 35%;
+      left: 0;
       right: 0;
       top: 70%;
       background-color: $color-white;
       border: none;
-      padding: rem(12px) rem(40px);
+      padding: rem(12px) rem(20px);
       font-size: 18px;
       font-weight: $font-weight-bold;
       box-shadow: 0 10px 16px $color-border;
       border-radius: 30px;
+
+      @include respond(tab-land) {
+        width: 50%;
+        top: 60%;
+      }
     }
 
     .float-container {
@@ -208,20 +243,27 @@
     .review {
       font-size: 16px;
       padding: 38px 0 80px 17px;
-      width: 90%;
       box-shadow: 0 10px 16px $color-border;
       resize: none;
-      margin-left: 11px;
       position: absolute;
-      z-index: 99;
+      width: 90%;
+      margin: 0 auto;
       top: 21%;
+      right: 0;
+      left: 0;
+      z-index: 99;
+
       overflow: hidden;
       border-radius: 10px;
       border: none;
+
+      @include respond(tab-land) {
+        padding: 38px 7px 40px 10px;
+        font-size: 14px;
+      }
     }
 
     ::placeholder {
-      // padding-top: 5px;
       font-weight: 500;
       color: $color-black;
     }
@@ -229,26 +271,60 @@
     .question {
       font-size: 16px;
       position: absolute;
+      width: 100%;
+      margin: 0 auto;
       top: 23%;
-      left: 10px;
+      left: 0;
+      right: 0;
       z-index: 999;
-      padding: 5px 20px;
+      padding-top: 5px;
+      padding-left: 30px;
       font-weight: $font-weight-bold;
+
+      @include respond(tab-land) {
+        font-size: 13px;
+        padding-left: 15px;
+      }
+      @include respond(tab-port) {
+        padding-left: 20px;
+      }
     }
     .count {
       position: absolute;
+      width: 95%;
+      margin: 0 auto;
       top: 55%;
-      left: 12px;
+      left: 0;
+      right: 0;
       font-size: 13px;
       font-weight: $font-weight-bold;
       border: none;
       background: transparent;
+
+      @include respond(tab-land) {
+        top: 53%;
+      }
+      @include respond(tab-port) {
+        top: 48%;
+      }
     }
     .count-text {
       position: absolute;
-      top: 55.1%;
-      left: 41px;
+      width: 81%;
+      margin: 0 auto;
+      top: 55%;
+      left: 0;
+      right: 0;
       font-weight: $font-weight-bold;
+
+      @include respond(tab-land) {
+        top: 53.1%;
+        width: 75%;
+      }
+
+      @include respond(tab-port) {
+        top: 48.1%;
+      }
     }
 
     h3 {
