@@ -25,15 +25,9 @@
       "id": 4
     },
     {
-<<<<<<< HEAD
-      "productId": 1,
-      "rating": 4,
-      "comment": "Hello, I liked what I saw. Thank you.",
-=======
       "productId": 2,
       "rating": 2,
       "comment": "Creating a pull request",
->>>>>>> dev
       "id": 5
     }
   ]
