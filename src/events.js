@@ -268,15 +268,15 @@ products.forEach(product => {
 
         const validText = review.value.trim()
         //enable submit button if user valid input is greater than 10 characters and vice verse
-        const btn = d.querySelector(".submit-btn")
+        const submitButton = d.querySelector(".submit-btn")
         if (validText.length > 10) {
-          btn.disabled = false
-          btn.classList.remove("disabled-btn")
-          btn.classList.add("enabled-btn")
+          submitButton.disabled = false
+          submitButton.classList.remove("disabled-btn")
+          submitButton.classList.add("enabled-btn")
         } else {
-          btn.disabled = true
-          btn.classList.remove("enabled-btn")
-          btn.classList.add("disabled-btn")
+          submitButton.disabled = true
+          submitButton.classList.remove("enabled-btn")
+          submitButton.classList.add("disabled-btn")
         }
       }
 
