@@ -31,8 +31,8 @@ products.forEach(product => {
     buttonDiv.appendChild(button)
     product.appendChild(buttonDiv)
 
-    const btn = d.querySelector(".review-btn")
-    btn.innerHTML = "Write a review"
+    const reviewButton = d.querySelector(".review-btn")
+    reviewButton.textContent = "Write a review"
 
     // add opacity for all image on hover
     imgs.forEach(img => {
@@ -60,7 +60,6 @@ products.forEach(product => {
     imgs.forEach(img => {
       img.style.removeProperty("opacity")
     })
-    product.style.removeProperty("relative")
   }
 
   //when user click on the review button
