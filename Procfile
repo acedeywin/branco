@@ -1,0 +1,1 @@
+web: sass --style=compressed --color assets/scss/styles.scss static_assets/css/styles.css
