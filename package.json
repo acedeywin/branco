@@ -23,5 +23,9 @@
     "@fortawesome/fontawesome-free": "^5.15.3",
     "normalize.css": "^8.0.1",
     "sass": "^1.32.5"
+  },
+  "engines": {
+    "node": "14.17.x",
+    "npm": "7.14.x"
   }
 }
